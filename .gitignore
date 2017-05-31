@@ -1,0 +1,8 @@
+##ignore this file##
+gradlew
+gradlew.bat
+.gradle
+.idea
+gradle
+*.iml
+build
