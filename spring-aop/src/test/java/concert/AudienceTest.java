@@ -13,7 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @Date 2017/5/27 14:27
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ConcertConfig.class)
+//@ContextConfiguration(classes = ConcertConfig.class)
+@ContextConfiguration("classpath:concert-config.xml")
 public class AudienceTest {
 
     @Autowired
@@ -22,5 +23,7 @@ public class AudienceTest {
     @Test
     public void testAudience(){
         performance.perform();
+        Encoreable encoreable = (Encoreable) performance;
+        encoreable.performEncore();
     }
 }

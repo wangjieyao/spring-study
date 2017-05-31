@@ -21,7 +21,6 @@ public class TrackCounter {
     public void trackPlayed(int trackNumber){}
 
     @Before("trackPlayed(trackNumber)")
-//    @Before("execution(* soundsystem.CompactDisc.playTrack(int)) && args(trackNumber)")
     public void countTrack(int trackNumber){
         int currentCount = getPlayCount(trackNumber);
         trackCounts.put(trackNumber,currentCount+1);

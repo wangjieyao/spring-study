@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TrackCounterConfig.class)
+//@ContextConfiguration("classpath:trackcounter-config.xml")
 public class TestTrackCounter {
     @Rule
     public final SystemOutRule log = new SystemOutRule().enableLog();
