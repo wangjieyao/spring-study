@@ -11,6 +11,6 @@
 	<import resource="domain.xml" />
 	<import resource="dataaccess.xml" />
 
-	<context:component-scan base-package="pizza" />
+	<context:component-scan base-package="springstudy.pizza" />
 	
 </beans>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
 <flow xmlns="http://www.springframework.org/schema/webflow"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/webflow 
@@ -16,7 +17,7 @@
         <evaluate result="order.customer" expression=
             "pizzaFlowActions.lookupCustomer(requestParameters.phoneNumber)" />
         <transition to="registrationForm" on-exception=
-            "com.springinaction.pizza.service.CustomerNotFoundException" />
+            "springstudy.pizza.service.CustomerNotFoundException" />
         <transition to="customerReady" />
     </action-state>
     

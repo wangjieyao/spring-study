@@ -16,10 +16,10 @@
     <view-state id="createPizza" model="flowScope.pizza">
         <on-entry>
           <set name="flowScope.pizza" 
-              value="new com.springinaction.pizza.domain.Pizza()" />
+              value="new springstudy.pizza.domain.Pizza()" />
               
           <evaluate result="viewScope.toppingsList" 
-              expression="T(com.springinaction.pizza.domain.Topping).asList()" />
+              expression="T(springstudy.pizza.domain.Topping).asList()" />
         </on-entry>
         <transition on="addPizza" to="showOrder">
           <evaluate expression="order.addPizza(flowScope.pizza)" />
