@@ -21,6 +21,7 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
     /**
      * 将一个或者多个路径映射到DispatcherServlet上
+     *
      * @return
      */
     @Override
