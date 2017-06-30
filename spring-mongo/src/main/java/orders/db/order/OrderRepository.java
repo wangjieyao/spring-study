@@ -1,4 +1,4 @@
-package orders.db;
+package orders.db.order;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import orders.bean.Order;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-public interface OrderRepository extends MongoRepository<Order, String> , OrderOperations {
+public interface OrderRepository extends MongoRepository<Order, Long> , OrderOperations {
 
 	List<Order> findByCustomer(String customer);
 

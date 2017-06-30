@@ -1,10 +1,13 @@
 import orders.bean.Item;
 import orders.bean.Order;
 import orders.config.MongoConfig;
+import orders.config.MongoConfig1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -16,25 +19,37 @@ import java.util.LinkedHashSet;
  * @author wangjieyao
  * @Date 2017/6/22 20:26
  */
-@ContextConfiguration(classes=MongoConfig.class)
+//@ContextConfiguration(classes=MongoConfig1.class)
+@ContextConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MongoTest {
 
     @Autowired
-    private MongoOperations mongo;
+    @Qualifier(value = "projectTemplate")
+    private MongoOperations projectOperaions;
+
+    @Autowired
+    @Qualifier(value = "testTemplate")
+    private MongoTemplate mongo1;
 
     @Test
     public void testMongo(){
         Order order = createOrder();
-        mongo.save(order,"order");
+        mongo1.save(order,"order");
     }
 
     @Test
     public void testSearchMongo(){
-        long count = mongo.getCollection("order").count();
+        long count = mongo1.getCollection("order").count();
         System.out.println(count);
-        Order order = mongo.findById(1,Order.class);
+        Order order = mongo1.findById(1,Order.class);
         System.out.println("Price:"+order.getPrice());
+        testProject();
+    }
+
+    public void testProject(){
+        long count = projectOperaions.getCollection("project").count();
+        System.out.println(count);
     }
 
     private Order createOrder(){

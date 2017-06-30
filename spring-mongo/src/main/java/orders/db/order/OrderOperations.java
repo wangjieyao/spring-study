@@ -1,4 +1,4 @@
-package orders.db;
+package orders.db.order;
 
 import orders.bean.Order;
 

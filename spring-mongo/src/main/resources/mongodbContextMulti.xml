@@ -1,0 +1,44 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+	   <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"-->
+	   <!--xmlns:mongo="http://www.springframework.org/schema/data/mongo"-->
+	   <!--xsi:schemaLocation="http://www.springframework.org/schema/data/mongo-->
+          <!--http://www.springframework.org/schema/data/mongo/spring-mongo.xsd-->
+          <!--http://www.springframework.org/schema/beans-->
+          <!--http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">-->
+
+	<!--<mongo:mongo-client-->
+			<!--credentials="test:123456@test"-->
+			<!--replica-set="10.120.10.27:27017"  port="27017"-->
+			<!--id="mongo"-->
+	<!--&gt;-->
+		<!--<mongo:client-options  connections-per-host="200" read-preference="SECONDARY_PREFERRED"/>-->
+	<!--</mongo:mongo-client>-->
+
+	<!--<mongo:db-factory id="mongoDbFactory" dbname="${mongo.dbname}"-->
+					  <!--write-concern="SAFE" mongo-ref="mongo" />-->
+
+	<!--&lt;!&ndash; <mongo:db-factory dbname="${mongo.dbname}" username="${mongo.username}"-->
+		<!--password="${mongo.password}" mongo-ref="mongo" /> &ndash;&gt;-->
+
+	<!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">-->
+		<!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />-->
+		<!--<constructor-arg name="mongoConverter" ref="mappingMongoConverter" />-->
+	<!--</bean>-->
+
+	<!--<mongo:repositories base-package="orders.db" />-->
+	<!--<bean id="mappingContext"-->
+		  <!--class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />-->
+	<!--<bean id="mappingMongoConverter"-->
+		  <!--class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">-->
+		<!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />-->
+		<!--<constructor-arg name="mappingContext" ref="mappingContext" />-->
+		<!--<property name="typeMapper" ref="defaultMongoTypeMapper" />-->
+	<!--</bean>-->
+	<!--<bean id="defaultMongoTypeMapper"-->
+		  <!--class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">-->
+		<!--<constructor-arg name="typeKey">-->
+			<!--<null />-->
+		<!--</constructor-arg>-->
+	<!--</bean>-->
+<!--</beans>-->

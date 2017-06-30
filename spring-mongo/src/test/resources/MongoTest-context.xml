@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<mongo:mongo-client
+			credentials="test:123456@test"
+			replica-set="10.120.10.27:27017"  port="27017"
+			id="mongo1">
+		<mongo:client-options  connections-per-host="200" read-preference="SECONDARY_PREFERRED"/>
+	</mongo:mongo-client>
+
+	<mongo:db-factory id="mongoDbFactory1" dbname="test"
+					  write-concern="SAFE" mongo-ref="mongo1" />
+
+	<bean id="testTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory1" />
+		<constructor-arg name="mongoConverter" ref="mappingMongoConverter1" />
+	</bean>
+
+	<mongo:repositories base-package="orders.db.order" mongo-template-ref="testTemplate" >
+		<!--<mongo:repository id="orderRepository" mongo-template-ref="orderTemplate"/>-->
+	</mongo:repositories>
+	<bean id="mappingContext"
+		  class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+	<bean id="mappingMongoConverter1"
+		  class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory1" />
+		<constructor-arg name="mappingContext" ref="mappingContext" />
+		<property name="typeMapper" ref="defaultMongoTypeMapper" />
+	</bean>
+	<bean id="defaultMongoTypeMapper"
+		  class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey" >
+			<null/>
+		</constructor-arg>
+	</bean>
+
+	<!--==============================-->
+
+	<mongo:mongo-client
+			credentials="test:123456@test"
+			replica-set="10.120.10.27:27017"  port="27017"
+			id="mongo2">
+		<mongo:client-options  connections-per-host="200" read-preference="SECONDARY_PREFERRED"/>
+	</mongo:mongo-client>
+
+	<mongo:db-factory id="mongoDbFactory2" dbname="test"
+					  write-concern="SAFE" mongo-ref="mongo2" />
+
+	<bean id="projectTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory2" />
+		<constructor-arg name="mongoConverter" ref="mappingMongoConverter2" />
+	</bean>
+
+	<mongo:repositories base-package="orders.db.project" mongo-template-ref="projectTemplate"/>
+	<bean id="mappingContext2"
+		  class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+	<bean id="mappingMongoConverter2"
+		  class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory1" />
+		<constructor-arg name="mappingContext" ref="mappingContext" />
+		<property name="typeMapper" ref="defaultMongoTypeMapper" />
+	</bean>
+	<bean id="defaultMongoTypeMapper2"
+		  class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey" >
+			<null/>
+		</constructor-arg>
+	</bean>
+</beans>
