@@ -30,7 +30,7 @@ public interface SpittleRepository {
   @Cacheable("spittleCache")
   List<Spittle> findBySpitterId(long spitterId);
   
-  @CacheEvict(value="spittleCache",condition="")
+  @CacheEvict(value="spittleCache")
   void delete(long id);
     
 }
