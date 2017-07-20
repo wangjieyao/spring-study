@@ -1,6 +1,8 @@
 package cache.bean;
 
-public class Spitter {
+import java.io.Serializable;
+
+public class Spitter implements Serializable{
   
   private Long id;
   private String username;
@@ -42,4 +44,15 @@ public class Spitter {
     return updateByEmail;
   }
 
+  @Override
+  public String toString() {
+    return "Spitter{" +
+            "id=" + id +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", fullName='" + fullName + '\'' +
+            ", email='" + email + '\'' +
+            ", updateByEmail=" + updateByEmail +
+            '}';
+  }
 }

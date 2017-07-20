@@ -24,23 +24,40 @@ import java.sql.Date;
 @ContextConfiguration(classes= RootConfig.class)
 public class TestCache {
 
-    @Autowired
-    private SpittleRepository repository;
+//    @Autowired
+//    private SpittleRepository repository;
 
     @Autowired
     private SpitterRepository spitterRepository;
 
+//    @Test
+//    @Transactional
+//    public void testSave(){
+//        Spitter spitter = spitterRepository.findOne(1l);
+//        Spittle spittle = new Spittle(1l,spitter,"message",new Date(System.currentTimeMillis()));
+//        repository.save(spittle);
+//    }
+//    @Test
+//    public void testFindOne(){
+//        Spittle spittle = repository.findOne(1);
+//        System.out.println(spittle);
+//    }
+
     @Test
     @Transactional
-    public void testSave(){
-        Spitter spitter = spitterRepository.findOne(1l);
-        Spittle spittle = new Spittle(1l,spitter,"message",new Date(System.currentTimeMillis()));
-        repository.save(spittle);
-    }
-    @Test
-    public void testFindOne(){
-        Spittle spittle = repository.findOne(1);
-        System.out.println(spittle);
+    public void testSaveSpitter(){
+        Spitter spitter = createSpitter();
+        spitterRepository.save(spitter);
     }
 
+    @Test
+    public void testFindSpitter(){
+        Spitter spitter = spitterRepository.findOne(1l);
+        System.out.println(spitter.toString());
+    }
+
+    private Spitter createSpitter(){
+        Spitter spitter = new Spitter(null,"wangjy","123456","wangjieyao","test@qq.com",false);
+        return spitter;
+    }
 }

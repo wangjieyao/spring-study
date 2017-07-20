@@ -1,8 +1,9 @@
 package cache.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Spittle {
+public class Spittle implements Serializable{
   private final Long id;
   private final Spitter spitter;
   private final String message;

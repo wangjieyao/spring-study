@@ -16,21 +16,21 @@ public interface SpittleRepository {
 
   long count();
   
-  @Cacheable("spittleCache")
+//  @Cacheable("spittleCache")
   List<Spittle> findRecent();
 
   List<Spittle> findRecent(int count);
 
-  @Cacheable("spittleCache")
+//  @Cacheable("spittleCache")
   Spittle findOne(long id);
 
-  @CachePut(value="spittleCache", key="#result.id")
+//  @CachePut(value="spittleCache", key="#result.id")
   Spittle save(Spittle spittle);
     
-  @Cacheable("spittleCache")
+//  @Cacheable("spittleCache")
   List<Spittle> findBySpitterId(long spitterId);
   
-  @CacheEvict(value="spittleCache")
+//  @CacheEvict(value="spittleCache")
   void delete(long id);
     
 }

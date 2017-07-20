@@ -1,9 +1,10 @@
 package cache.config;
 
 
-import org.springframework.cache.CacheManager;
+import cache.bean.Spitter;
+import net.sf.ehcache.CacheManager;
+
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -26,11 +27,16 @@ public class CacheConfig {
      * 声明缓存管理器
      * @return
      */
-    @Bean
-    public CacheManager cacheManager(){
-        return new ConcurrentMapCacheManager();
-    }
+//    @Bean
+//    public CacheManager cacheManager(){
+//        return new ConcurrentMapCacheManager();
+//    }
 
+//    /**
+//     * 使用ehcache进行缓存管理
+//     * @param cm
+//     * @return
+//     */
 //    @Bean
 //    public EhCacheCacheManager cacheManager(CacheManager cm){
 //        return new EhCacheCacheManager(cm);
@@ -43,30 +49,30 @@ public class CacheConfig {
 //        return ehCacheManagerFactoryBean;
 //    }
 
-//    @Bean
-//    public JedisConnectionFactory redisConnectionFactory(){
-//        JedisConnectionFactory jcf = new JedisConnectionFactory();
-//        jcf.afterPropertiesSet();
-//        return jcf;
-//    }
-//
-//    @Bean
-//    public RedisTemplate<String,String> redisTemplate(RedisConnectionFactory rcf){
-//        RedisTemplate<String,String> redisTemplate = new RedisTemplate<String,String>();
-//        redisTemplate.setConnectionFactory(rcf);
-//        redisTemplate.afterPropertiesSet();
-//        return redisTemplate;
-//    }
-//
-//    /**
-//     * 使用redis缓存管理器
-//     * @param redisTemplate
-//     * @return
-//     */
-//    @Bean
-//    public RedisCacheManager cacheManager(RedisTemplate redisTemplate){
-//        return new RedisCacheManager(redisTemplate);
-//    }
+    @Bean
+    public JedisConnectionFactory redisConnectionFactory(){
+        JedisConnectionFactory jcf = new JedisConnectionFactory();
+        jcf.afterPropertiesSet();
+        return jcf;
+    }
+
+    @Bean
+    public RedisTemplate<String,String> redisTemplate(RedisConnectionFactory rcf){
+        RedisTemplate<String,String> redisTemplate = new RedisTemplate<String,String>();
+        redisTemplate.setConnectionFactory(rcf);
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
+
+    /**
+     * 使用redis缓存管理器
+     * @param redisTemplate
+     * @return
+     */
+    @Bean
+    public RedisCacheManager cacheManager(RedisTemplate redisTemplate){
+        return new RedisCacheManager(redisTemplate);
+    }
 
    /* *//**
      * 使用多个缓存管理器

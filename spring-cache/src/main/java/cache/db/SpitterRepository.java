@@ -1,6 +1,8 @@
 package cache.db;
 
 import cache.bean.Spitter;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public interface SpitterRepository {
 
   long count();
-  
+
+  @CachePut(value="spitterCache", key="#result.id")
   Spitter save(Spitter spitter);
-  
+
+  @Cacheable(value="spitterCache")
   Spitter findOne(long id);
 
   Spitter findByUsername(String username);

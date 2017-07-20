@@ -2,13 +2,15 @@ package cache.config;
 
 import javax.sql.DataSource;
 
+import cache.db.SpitterRepository;
+import cache.db.SpittleRepository;
+import cache.db.jdbc.JdbcSpitterRepository;
+import cache.db.jdbc.JdbcSpittleRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
@@ -36,4 +38,13 @@ public class DataConfig implements TransactionManagementConfigurer {
     return new DataSourceTransactionManager(dataSource());
   }
 
+  @Bean
+  public SpitterRepository spitterRepository(JdbcTemplate jdbcTemplate) {
+    return new JdbcSpitterRepository(jdbcTemplate);
+  }
+
+  @Bean
+  public SpittleRepository spittleRepository(JdbcTemplate jdbcTemplate) {
+    return new JdbcSpittleRepository(jdbcTemplate);
+  }
 }
